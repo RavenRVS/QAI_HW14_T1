@@ -5,9 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.netology.qai.javaforqai.hw14.task1.data.Ticket;
+import ru.netology.qai.javaforqai.hw14.task1.data.TicketByFlightTimeAscComparator;
 import ru.netology.qai.javaforqai.hw14.task1.data.TicketRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 
 class TicketManagerTest {
@@ -16,9 +16,9 @@ class TicketManagerTest {
 
     Ticket ticket1 = new Ticket(1, 20000, "MOW","LED", 100);
     Ticket ticket2 = new Ticket(2, 12000, "MOW","LED", 120);
-    Ticket ticket3 = new Ticket(3, 14000, "MOW","LED", 125);
-    Ticket ticket4 = new Ticket(4, 12000, "MOW","LED", 150);
-    Ticket ticket5 = new Ticket(5, 18000, "MOW","LED", 120);
+    Ticket ticket3 = new Ticket(3, 14000, "MOW","LED", 150);
+    Ticket ticket4 = new Ticket(4, 12000, "MOW","LED", 125);
+    Ticket ticket5 = new Ticket(5, 18000, "MOW","LED", 110);
     Ticket ticket6 = new Ticket(6, 15000, "LED","MOW", 120);
     Ticket ticket7 = new Ticket(7, 13000, "LED","MOW", 120);
     Ticket ticket8 = new Ticket(8, 16000, "MOW","KUF", 125);
@@ -67,7 +67,15 @@ class TicketManagerTest {
 
         Assertions.assertArrayEquals(expected,actual);
     }
+    @Test
+    void findAllWithComparator() {
 
+        TicketByFlightTimeAscComparator comparator = new TicketByFlightTimeAscComparator();
+        Ticket[] expected = {ticket1,ticket5,ticket2,ticket4,ticket3};
+        Ticket[] actual = manager.findAll("MOW", "LED", comparator);
+
+        Assertions.assertArrayEquals(expected,actual);
+    }
     @Test
     void add() {
 
