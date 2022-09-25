@@ -4,6 +4,7 @@ import ru.netology.qai.javaforqai.hw14.task1.data.Ticket;
 import ru.netology.qai.javaforqai.hw14.task1.data.TicketRepository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class TicketManager {
     TicketRepository repo = new TicketRepository();
@@ -25,6 +26,11 @@ public class TicketManager {
                 searchingResults = tmp;
             }
         }
+        return searchingResults;
+    }
+    public Ticket[] findAll(String from, String to, Comparator<Ticket> comparator) {
+        Ticket[] searchingResults = findAll(from,to);
+        Arrays.sort(searchingResults, comparator);
         return searchingResults;
     }
 
